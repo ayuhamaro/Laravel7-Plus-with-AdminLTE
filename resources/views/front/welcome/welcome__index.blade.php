@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-12">
-        <h1><?php echo $msg; ?></h1>
+        <h1>{!! $msg !!}</h1>
         <br>
     </div>
 </div>
@@ -20,30 +20,33 @@
         <span>控制器：app\Controllers\Home.php</span>
         <pre>
             <code>
-namespace App\Controllers;
+namespace App\Http\Controllers;
 
-class Home extends MyFrontController
+use Illuminate\Http\Request;
+use App\Http\Models\WelcomeModel;
+use App\Http\Libs\MyPaginationLib;
+
+class WelcomeController extends MyFrontController
 {
-    public function index()
+    public function index(Request $request)
     {
-        $config = config('Config\\Site');
-        $paginationLib = new \App\Libraries\MyPaginationLib();
+        $PaginationLib = new MyPaginationLib();
 
-        $this->set_view_data('page_title', 'Hi! I\'m '.$config->siteName);
-        $this->set_view_data('msg', '簡單輕鬆套上全功能版型');
-
-
-        $page_num = (is_null($this->request->getGet('page_num')))?'1': $this->request->getGet('page_num');
+        $this->setViewData('page_title', 'Hi! I\'m '.(string)config('site.siteName'));
+        $this->setViewData('msg', '簡單輕鬆套上全功能版型');
 
 
-        $paginationLib->setting($page_num, 10, 128);
-        $pagination_link = $paginationLib->pagination_link();
-        $this->set_view_data('pagination_link', $pagination_link);
-        $pagination_select = $paginationLib->pagination_select();
-        $this->set_view_data('pagination_select', $pagination_select);
+        $pageNum = (is_null($request->query('page_num')))?'1': $request->query('page_num');
 
 
-        return $this->render('front/home/home__index');
+        $PaginationLib->setting($pageNum, 10, 128);
+        $paginationLink = $PaginationLib->paginationLink();
+        $this->setViewData('paginationLink', $paginationLink);
+        $paginationSelect = $PaginationLib->paginationSelect();
+        $this->setViewData('paginationSelect', $paginationSelect);
+
+
+        return $this->render('front.welcome.welcome__index');
     }
 }
             </code>
@@ -55,16 +58,17 @@ class Home extends MyFrontController
     $str = <<<EOD
 <div class="row">
     <div class="col-12">
-        <h1><?php echo \$msg; ?></h1>
+        <h1>{!! \$msg !!}</h1>
+        <br>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-8">
-        <?php echo \$pagination_link; ?>
+    <div class="col-12 col-lg-8 col-xl-6">
+        {!! \$paginationLink !!}
     </div>
-    <div class="col-4">
-        <?php echo \$pagination_select; ?>
+    <div class="col-12 col-lg-4 col-xl-2">
+        {!! \$paginationSelect !!}
     </div>
 </div>
 EOD;
