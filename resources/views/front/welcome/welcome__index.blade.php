@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-12">
         <br>
-        <span>控制器：app\Controllers\Home.php</span>
+        <span>控制器：app\Controllers\WelcomeController.php</span>
         <pre>
             <code>
 namespace App\Http\Controllers;
@@ -51,7 +51,7 @@ class WelcomeController extends MyFrontController
 }
             </code>
         </pre>
-        <span>視圖：app\Views\front\home\home__index.php</span>
+        <span>視圖：resources\views\front\welcome\welcome__index.blade.php</span>
         <pre>
             <code>
 <?php
