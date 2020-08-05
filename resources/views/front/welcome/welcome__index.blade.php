@@ -1,15 +1,15 @@
 <div class="row">
     <div class="col-12">
-        <h1>{!! $msg !!}</h1>
+        <h1>{{ $msg }}</h1>
         <br>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-12 col-lg-8 col-xl-6">
+    <div class="col-12 col-lg-6 col-xl-5">
         {!! $paginationLink !!}
     </div>
-    <div class="col-12 col-lg-4 col-xl-2">
+    <div class="col-12 col-lg-4 col-xl-3">
         {!! $paginationSelect !!}
     </div>
 </div>
@@ -23,7 +23,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\WelcomeModel;
 use App\Http\Libs\MyPaginationLib;
 
 class WelcomeController extends MyFrontController
@@ -58,16 +57,16 @@ class WelcomeController extends MyFrontController
     $str = <<<EOD
 <div class="row">
     <div class="col-12">
-        <h1>{!! \$msg !!}</h1>
+        <h1>{{ \$msg }}</h1>
         <br>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-12 col-lg-8 col-xl-6">
+    <div class="col-12 col-lg-6 col-xl-5">
         {!! \$paginationLink !!}
     </div>
-    <div class="col-12 col-lg-4 col-xl-2">
+    <div class="col-12 col-lg-4 col-xl-3">
         {!! \$paginationSelect !!}
     </div>
 </div>

@@ -12,7 +12,7 @@ class MyPaginationLib
     private $queryString = '';
     private $uriPattern = '';
 
-    public function __construct($pageNum = 1, $perPage = 10, $totalRows = 1, $queryStringSegment = 'pageNum')
+    public function __construct($pageNum = 1, $perPage = 10, $totalRows = 1, $queryStringSegment = 'page_num')
     {
         $this->setting($pageNum, $perPage, $totalRows, $queryStringSegment);
     }
@@ -45,7 +45,7 @@ class MyPaginationLib
         }
     }
 
-    public function paginationLink($show_pageCount = 7)
+    public function paginationLink($showPageCount = 7)
     {
         $paginationArray = array();
 
@@ -57,21 +57,21 @@ class MyPaginationLib
             //    'text' => '1',
             //);
         }
-        elseif($this->pageCount <= $show_pageCount)
+        elseif($this->pageCount <= $showPageCount)
         {
-            if($this->pageNum !== 1)
-            {
-                $paginationArray[] = array(
-                    'href' => (string)1,
-                    'class' => 'page-link',
-                    'text' => '第一頁',
-                );
-                $paginationArray[] = array(
-                    'href' => sprintf($this->uriPattern, ($this->pageNum - 1)),
-                    'class' => 'page-link',
-                    'text' => '上一頁',
-                );
-            }
+            //if($this->pageNum !== 1)
+            //{
+            //    $paginationArray[] = array(
+            //        'href' => (string)1,
+            //        'class' => 'page-link',
+            //        'text' => '第一頁',
+            //    );
+            //    $paginationArray[] = array(
+            //        'href' => sprintf($this->uriPattern, ($this->pageNum - 1)),
+            //        'class' => 'page-link',
+            //        'text' => '上一頁',
+            //    );
+            //}
 
             for($i = 1; $i <= $this->pageCount; $i++)
             {
@@ -93,40 +93,49 @@ class MyPaginationLib
                 }
             }
 
-            if($this->pageNum !== $this->pageCount)
-            {
-                $paginationArray[] = array(
-                    'href' => sprintf($this->uriPattern, $i),
-                    'class' => 'page-link',
-                    'text' => '下一頁',
-                );
-                $paginationArray[] = array(
-                    'href' => sprintf($this->uriPattern, $this->pageCount),
-                    'class' => 'page-link',
-                    'text' => '最末頁',
-                );
-            }
+            //if($this->pageNum !== $this->pageCount)
+            //{
+            //    $paginationArray[] = array(
+            //        'href' => sprintf($this->uriPattern, $i),
+            //        'class' => 'page-link',
+            //        'text' => '下一頁',
+            //    );
+            //    $paginationArray[] = array(
+            //        'href' => sprintf($this->uriPattern, $this->pageCount),
+            //        'class' => 'page-link',
+            //        'text' => '最末頁',
+            //    );
+            //}
         }
         else
         {
-            if($this->pageNum !== 1)
+            //if($this->pageNum !== 1)
+            //{
+            //    $paginationArray[] = array(
+            //        'href' => sprintf($this->uriPattern, 1),
+            //        'class' => 'page-link',
+            //        'text' => '第一頁',
+            //    );
+            //    $paginationArray[] = array(
+            //        'href' => sprintf($this->uriPattern, $this->pageNum - 1),
+            //        'class' => 'page-link',
+            //        'text' => '上一頁',
+            //    );
+            //}
+
+            if($this->pageNum > ceil($showPageCount / 2))
             {
                 $paginationArray[] = array(
                     'href' => sprintf($this->uriPattern, 1),
                     'class' => 'page-link',
-                    'text' => '第一頁',
-                );
-                $paginationArray[] = array(
-                    'href' => sprintf($this->uriPattern, $this->pageNum - 1),
-                    'class' => 'page-link',
-                    'text' => '上一頁',
+                    'text' => '<<',
                 );
             }
 
-            if($this->pageNum <= ceil($show_pageCount / 2))
+            if($this->pageNum <= ceil($showPageCount / 2))
             {
                 // 頭
-                for($i = 1; $i <= $show_pageCount; $i++)
+                for($i = 1; $i <= $showPageCount; $i++)
                 {
                     if($i == $this->pageNum)
                     {
@@ -146,10 +155,10 @@ class MyPaginationLib
                     }
                 }
             }
-            elseif($this->pageNum >= $this->pageCount - floor($show_pageCount / 2))
+            elseif($this->pageNum >= $this->pageCount - floor($showPageCount / 2))
             {
                 // 尾
-                for($i = ($this->pageCount - $show_pageCount) + 1; $i <= $this->pageCount; $i++)
+                for($i = ($this->pageCount - $showPageCount) + 1; $i <= $this->pageCount; $i++)
                 {
                     if($i == $this->pageNum)
                     {
@@ -172,8 +181,8 @@ class MyPaginationLib
             else
             {
                 // 中
-                $begin = $this->pageNum - floor($show_pageCount / 2);
-                for($i = $begin; $i <= $this->pageNum + floor($show_pageCount / 2); $i++)
+                $begin = $this->pageNum - floor($showPageCount / 2);
+                for($i = $begin; $i <= $this->pageNum + floor($showPageCount / 2); $i++)
                 {
                     if($i == $this->pageNum)
                     {
@@ -194,32 +203,53 @@ class MyPaginationLib
                 }
             }
 
-            if($this->pageNum !== $this->pageCount)
+            if($this->pageNum <= $this->pageCount - ceil($showPageCount / 2))
             {
-                $paginationArray[] = array(
-                    'href' => sprintf($this->uriPattern, $this->pageNum + 1),
-                    'class' => 'page-link',
-                    'text' => '下一頁',
-                );
                 $paginationArray[] = array(
                     'href' => sprintf($this->uriPattern, $this->pageCount),
                     'class' => 'page-link',
-                    'text' => '最末頁',
+                    'text' => '>>',
                 );
             }
+
+            //if($this->pageNum !== $this->pageCount)
+            //{
+            //    $paginationArray[] = array(
+            //        'href' => sprintf($this->uriPattern, $this->pageNum + 1),
+            //        'class' => 'page-link',
+            //        'text' => '下一頁',
+            //    );
+            //    $paginationArray[] = array(
+            //        'href' => sprintf($this->uriPattern, $this->pageCount),
+            //        'class' => 'page-link',
+            //        'text' => '最末頁',
+            //    );
+            //}
         }
         $paginationArray[] = array(
             'href' => NULL,
             'class' => 'page-link page-link-disabled',
-            'text' => sprintf('共有&nbsp;%s&nbsp;筆，&nbsp;%s&nbsp;頁', $this->totalRows, $this->pageCount),
+            'text' => sprintf('%s&nbsp;筆，&nbsp;%s&nbsp;頁', $this->totalRows, $this->pageCount),
         );
 
         return view('template.pagination.link', array('pagination' => $paginationArray))->render();
     }
 
-    public function paginationSelect($show_pageCount = 7)
+    public function paginationSelect($showPageCount = 7)
     {
         $paginationArray = array();
+        $buttonArray = array(
+            'prev' => array(
+                'disabled' => TRUE,
+                'value' => NULL,
+                'text' => '上一頁',
+            ),
+            'next' => array(
+                'disabled' => TRUE,
+                'value' => NULL,
+                'text' => '下一頁',
+            ),
+        );
 
         if($this->pageCount == 1)
         {
@@ -230,14 +260,26 @@ class MyPaginationLib
                 'text' => '第 1 頁',
             );
         }
-        elseif($this->pageCount <= $show_pageCount)
+        elseif($this->pageCount <= $showPageCount)
         {
+            if($this->pageNum > 1)
+            {
+                $buttonArray['prev']['disabled'] = FALSE;
+                $buttonArray['prev']['value'] = sprintf($this->uriPattern, $this->pageNum - 1);
+            }
+
+            if($this->pageNum < $this->pageCount)
+            {
+                $buttonArray['next']['disabled'] = FALSE;
+                $buttonArray['next']['value'] = sprintf($this->uriPattern, $this->pageNum + 1);
+            }
+
             for($i = 1; $i <= $this->pageCount; $i++)
             {
                 if($i == $this->pageNum)
                 {
                     $paginationArray[] = array(
-                        'disabled' => TRUE,
+                        'disabled' => FALSE,
                         'selected' => TRUE,
                         'value' => sprintf($this->uriPattern, $i),
                         'text' => sprintf('第 %s 頁', $i),
@@ -256,7 +298,19 @@ class MyPaginationLib
         }
         else
         {
-            if($this->pageNum > ceil($show_pageCount / 2) + 1)
+            if($this->pageNum > 1)
+            {
+                $buttonArray['prev']['disabled'] = FALSE;
+                $buttonArray['prev']['value'] = sprintf($this->uriPattern, $this->pageNum - 1);
+            }
+
+            if($this->pageNum < $this->pageCount)
+            {
+                $buttonArray['next']['disabled'] = FALSE;
+                $buttonArray['next']['value'] = sprintf($this->uriPattern, $this->pageNum + 1);
+            }
+
+            if($this->pageNum > ceil($showPageCount / 2) + 1)
             {
                 $paginationArray[] = array(
                     'disabled' => FALSE,
@@ -272,7 +326,7 @@ class MyPaginationLib
                 );
             }
 
-            if($this->pageNum == ceil($show_pageCount / 2) + 1)
+            if($this->pageNum == ceil($showPageCount / 2) + 1)
             {
                 $paginationArray[] = array(
                     'disabled' => FALSE,
@@ -282,10 +336,10 @@ class MyPaginationLib
                 );
             }
 
-            if($this->pageNum <= ceil($show_pageCount / 2))
+            if($this->pageNum <= ceil($showPageCount / 2))
             {
                 // 頭
-                for($i = 1; $i <= $show_pageCount; $i++)
+                for($i = 1; $i <= $showPageCount; $i++)
                 {
                     if($i == $this->pageNum)
                     {
@@ -307,10 +361,10 @@ class MyPaginationLib
                     }
                 }
             }
-            elseif($this->pageNum >= $this->pageCount - floor($show_pageCount / 2))
+            elseif($this->pageNum >= $this->pageCount - floor($showPageCount / 2))
             {
                 // 尾
-                for($i = ($this->pageCount - $show_pageCount) + 1; $i <= $this->pageCount; $i++)
+                for($i = ($this->pageCount - $showPageCount) + 1; $i <= $this->pageCount; $i++)
                 {
                     if($i == $this->pageNum)
                     {
@@ -335,8 +389,8 @@ class MyPaginationLib
             else
             {
                 // 中
-                $begin = $this->pageNum - floor($show_pageCount / 2);
-                for($i = $begin; $i <= $this->pageNum + floor($show_pageCount / 2); $i++)
+                $begin = $this->pageNum - floor($showPageCount / 2);
+                for($i = $begin; $i <= $this->pageNum + floor($showPageCount / 2); $i++)
                 {
                     if($i == $this->pageNum)
                     {
@@ -359,7 +413,7 @@ class MyPaginationLib
                 }
             }
 
-            if($this->pageNum == $this->pageCount - ceil($show_pageCount / 2))
+            if($this->pageNum == $this->pageCount - ceil($showPageCount / 2))
             {
                 $paginationArray[] = array(
                     'disabled' => FALSE,
@@ -369,7 +423,7 @@ class MyPaginationLib
                 );
             }
 
-            if($this->pageNum < $this->pageCount - ceil($show_pageCount / 2))
+            if($this->pageNum < $this->pageCount - ceil($showPageCount / 2))
             {
                 $paginationArray[] = array(
                     'disabled' => TRUE,
@@ -386,7 +440,7 @@ class MyPaginationLib
             }
         }
 
-        return view('template.pagination.select', array('pagination' => $paginationArray))->render();
+        return view('template.pagination.select', array('pagination' => $paginationArray, 'button' => $buttonArray))->render();
     }
 
 }

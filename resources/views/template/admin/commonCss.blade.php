@@ -1,10 +1,10 @@
 <style type="text/css">
-    /*通用的CSS*/
+        /*通用的CSS*/
     html, body{
         font-family: Microsoft JhengHei, PingFang, STHeiti, Droid Sans !important;
     }
 
-    /* 換頁選單擴充CSS */
+        /* 換頁選單擴充CSS */
     .page-link-disabled{
         pointer-events: none;
         background-color: #dee2e6;
@@ -16,7 +16,7 @@
         margin-bottom: 0 !important;
     }
 
-    .pagination-select select{
+    .pagination-select select, .pagination-select button{
         height: calc(1.9rem + 2px) !important;
         font-size: .875rem !important;
         float: left !important;
