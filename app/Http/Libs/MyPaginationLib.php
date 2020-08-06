@@ -242,12 +242,22 @@ class MyPaginationLib
             'prev' => array(
                 'disabled' => TRUE,
                 'value' => NULL,
-                'text' => '上一頁',
+                'text' => '&nbsp;<&nbsp;',
             ),
             'next' => array(
                 'disabled' => TRUE,
                 'value' => NULL,
-                'text' => '下一頁',
+                'text' => '&nbsp;>&nbsp;',
+            ),
+            'first' => array(
+                'disabled' => TRUE,
+                'value' => NULL,
+                'text' => '&nbsp;<<&nbsp;',
+            ),
+            'last' => array(
+                'disabled' => TRUE,
+                'value' => NULL,
+                'text' => '&nbsp;>>&nbsp;',
             ),
         );
 
@@ -262,6 +272,12 @@ class MyPaginationLib
         }
         elseif($this->pageCount <= $showPageCount)
         {
+            if($this->pageNum > 2)
+            {
+                $buttonArray['first']['disabled'] = FALSE;
+                $buttonArray['first']['value'] = sprintf($this->uriPattern, 1);
+            }
+
             if($this->pageNum > 1)
             {
                 $buttonArray['prev']['disabled'] = FALSE;
@@ -272,6 +288,12 @@ class MyPaginationLib
             {
                 $buttonArray['next']['disabled'] = FALSE;
                 $buttonArray['next']['value'] = sprintf($this->uriPattern, $this->pageNum + 1);
+            }
+
+            if($this->pageNum < $this->pageCount - 1)
+            {
+                $buttonArray['last']['disabled'] = FALSE;
+                $buttonArray['last']['value'] = sprintf($this->uriPattern, $this->pageCount);
             }
 
             for($i = 1; $i <= $this->pageCount; $i++)
@@ -298,6 +320,12 @@ class MyPaginationLib
         }
         else
         {
+            if($this->pageNum > 2)
+            {
+                $buttonArray['first']['disabled'] = FALSE;
+                $buttonArray['first']['value'] = sprintf($this->uriPattern, 1);
+            }
+
             if($this->pageNum > 1)
             {
                 $buttonArray['prev']['disabled'] = FALSE;
@@ -308,6 +336,12 @@ class MyPaginationLib
             {
                 $buttonArray['next']['disabled'] = FALSE;
                 $buttonArray['next']['value'] = sprintf($this->uriPattern, $this->pageNum + 1);
+            }
+
+            if($this->pageNum < $this->pageCount - 1)
+            {
+                $buttonArray['last']['disabled'] = FALSE;
+                $buttonArray['last']['value'] = sprintf($this->uriPattern, $this->pageCount);
             }
 
             if($this->pageNum > ceil($showPageCount / 2) + 1)

@@ -1,6 +1,10 @@
 <div class="form-group pagination-select">
     <!--<label class="form-label">請選擇頁數</label>-->
 
+    <?php if( ! $button['first']['disabled']): ?>
+    <button type="button" class="form-control btn btn-block btn-default btn-xs" value="<?php echo $button['first']['value']; ?>" onclick="location.href = this.value;"><?php echo $button['first']['text']; ?></button>
+    <?php endif; ?>
+
     <?php if( ! $button['prev']['disabled']): ?>
     <button type="button" class="form-control btn btn-block btn-default btn-xs" value="<?php echo $button['prev']['value']; ?>" onclick="location.href = this.value;"><?php echo $button['prev']['text']; ?></button>
     <?php endif; ?>
@@ -21,5 +25,9 @@
 
     <?php if( ! $button['next']['disabled']): ?>
     <button type="button" class="form-control btn btn-block btn-default btn-xs" value="<?php echo $button['next']['value']; ?>" onclick="location.href = this.value;"><?php echo $button['next']['text']; ?></button>
+    <?php endif; ?>
+
+    <?php if( ! $button['last']['disabled']): ?>
+    <button type="button" class="form-control btn btn-block btn-default btn-xs" value="<?php echo $button['last']['value']; ?>" onclick="location.href = this.value;"><?php echo $button['last']['text']; ?></button>
     <?php endif; ?>
 </div>

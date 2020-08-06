@@ -9,7 +9,7 @@
     <div class="col-12 col-lg-6 col-xl-5">
         {!! $paginationLink !!}
     </div>
-    <div class="col-12 col-lg-4 col-xl-3">
+    <div class="col-12 col-lg-5 col-xl-4">
         {!! $paginationSelect !!}
     </div>
 </div>
@@ -66,7 +66,7 @@ class WelcomeController extends MyFrontController
     <div class="col-12 col-lg-6 col-xl-5">
         {!! \$paginationLink !!}
     </div>
-    <div class="col-12 col-lg-4 col-xl-3">
+    <div class="col-12 col-lg-5 col-xl-4">
         {!! \$paginationSelect !!}
     </div>
 </div>

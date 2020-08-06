@@ -35,4 +35,8 @@
         font-size: inherit !important;
         line-height: 1.5 !important;
     }
+
+    .pagination-select .btn-block + .btn-block{
+        margin-top: 0px !important;
+    }
 </style>
