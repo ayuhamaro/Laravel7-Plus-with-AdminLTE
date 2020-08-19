@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class MyFrontController extends Controller
+class MyAdminController extends Controller
 {
     /*傳送到view的資料陣列，為了讓MY_Controller能以權限機制操控，而宣告在這裡提供繼承*/
     private $viewData = array(
@@ -16,24 +16,24 @@ class MyFrontController extends Controller
         'layout_options' => 'sidebar-mini layout-fixed',
     );
     /*view的各版面區塊設定*/
-    protected $viewBase = 'template.front.pageBase';
+    protected $viewBase = 'template.admin.pageBase';
     protected $viewMetadata = null;
-    protected $viewCommonJs = 'template.front.commonJs';
+    protected $viewCommonJs = 'template.admin.commonJs';
     protected $viewJs = null;
-    protected $viewCommonCss = 'template.front.commonCss';
+    protected $viewCommonCss = 'template.admin.commonCss';
     protected $viewCss = null;
-    protected $viewHeader = 'template.front.header';
-    protected $viewContentHeader = 'template.front.contentHeader';
-    protected $viewContentFooter = 'template.front.contentFooter';
-    protected $viewLeftSide = 'template.front.leftSide';
-    protected $viewRightSide = 'template.front.rightSide';
-    protected $viewErrorMsg = 'template.front.errorMsg';
-    protected $viewContent = 'template.front.content';
-    protected $viewFooter = 'template.front.footer';
-    protected $viewExtra = 'template.front.extra';
-    protected $viewCommonNleJs = 'template.front.commonNleJs';
+    protected $viewHeader = 'template.admin.header';
+    protected $viewContentHeader = 'template.admin.contentHeader';
+    protected $viewContentFooter = 'template.admin.contentFooter';
+    protected $viewLeftSide = 'template.admin.leftSide';
+    protected $viewRightSide = 'template.admin.rightSide';
+    protected $viewErrorMsg = 'template.admin.errorMsg';
+    protected $viewContent = 'template.admin.content';
+    protected $viewFooter = 'template.admin.footer';
+    protected $viewExtra = 'template.admin.extra';
+    protected $viewCommonNleJs = 'template.admin.commonNleJs';
     protected $viewNleJs = null;
-    protected $viewCommonNleCss = 'template.front.commonNleCss';
+    protected $viewCommonNleCss = 'template.admin.commonNleCss';
     protected $viewNleCss = null;
 
     public function __construct()

@@ -14,3 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'WelcomeController@index');
+Route::get('/ajax', 'AjaxController@index');
+Route::get('/cli', 'CliController@index');
